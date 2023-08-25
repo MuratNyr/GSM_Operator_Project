@@ -1,0 +1,73 @@
+﻿@model GSM_Operator_Project.Models.Tarife
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-3">
+            <img src="https://i.pcmag.com/imagery/reviews/03POP0TjDjuXonJXI16Omn2-1.fit_lim.size_840x473.v1663720055.jpg" alt="Fotoğraf" class="img-fluid">
+        </div>
+        <div class="col-md-9">
+            <h2>@Model.TarifeAdi</h2>
+            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</p>
+        </div>
+    </div>
+    <div class="row">
+        <table class="table">
+            <tr>
+                <th>İnternet</th>
+                <th>Konuşma</th>
+                <th>Mesajlaşma</th>
+                <th>Ücret</th>
+            </tr>
+            <tr>
+                <td>@(Model.TarifeInternetMb / 1024) GB</td>
+                <td>@Model.TarifeDakika DK</td>
+                <td>@Model.TarifeSMS SMS</td>
+                <td>@Model.TarifeUcreti ₺/Ay</td>
+            </tr>
+        </table>
+    </div>
+    @* @if (string.IsNullOrEmpty(Context.Request.Cookies["UserName"])) { } *@
+    @* <a asp-controller="Musteri" asp-action="Index" type="button" class="w-100 btn btn-lg btn-outline-primary">Hemen Al</a> *@
+
+    @if (string.IsNullOrEmpty(Context.Request.Cookies["UserName"]))
+    {
+        <a href="@Url.Action("Login", "Account")" type="button" class="w-100 btn btn-lg btn-outline-primary">Hemen Al</a>
+        
+    }
+    else
+    {
+        <a href="" id="hemenAlButton" type="button" class="w-100 btn btn-lg btn-outline-primary" data-toggle="modal" data-target="#myModal">Hemen Al</a>
+    }
+
+
+    <div id="myModal" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Onay</h5>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Kampanya Dahilinde Tarifeye Dahil Olmak İstediğinize emin misiniz?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">İptal</button>
+                    <form asp-controller="Musteri" asp-action="Tarife" method="post">
+                        <input type="hidden" name="tarifeID" value="@Model.TarifeID">
+                        <button id="onayButton" type="submit" class="btn btn-primary">Onayla</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#onayButton").click(function () {
+            $("#myModal").modal('hide');
+        });
+    });
+</script>
+
+

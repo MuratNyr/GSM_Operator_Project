@@ -1,0 +1,54 @@
+﻿@model GSM_Operator_Project.Models.IndexViewModel
+@{
+    ViewData["Title"] = "Müşteri Listesi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    @* <h2>Müşteri Listesi</h2>
+    <table class="table table-bordered">
+    <tr>
+    <th>Müşteri ID</th>
+    <th>Ad</th>
+    <th>Soyad</th>
+    <th>TC</th>
+    <th>GSM No</th>
+    <th>Detay</th>
+    </tr>
+    @foreach (var musteri in Model.Musteri)
+    {
+    <tr>
+    <td>@musteri.MusteriID</td>
+    <td>@musteri.Ad</td>
+    <td>@musteri.Soyad</td>
+    <td>@musteri.TC</td>
+    <td>@musteri.GSMno</td>
+    <td>
+    <a asp-controller="Musteri" asp-action="Detay" asp-route-id="@musteri.MusteriID">Detay</a>
+    </td>
+    </tr>
+    }
+    </table> *@
+
+    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center mt-5">
+        @foreach (var tarife in Model.Tarife)
+        {
+            <div class="col">
+                <div class="card mb-4 rounded-3 shadow-sm">
+                    <div class="card-header py-3">
+                        <h4 class="my-0 fw-normal">@tarife.TarifeAdi</h4>
+                    </div>
+                    <div class="card-body">
+                        <h1 class="card-title pricing-card-title">₺ @tarife.TarifeUcreti<small class="text-body-secondary fw-light">/Ay</small></h1>
+                        <ul class="list-unstyled mt-3 mb-4">
+                            <li>@tarife.TarifeDakika Dakika</li>
+                            <li>@(tarife.TarifeInternetMb / 1024) GB İnternet</li>
+                            <li>@tarife.TarifeSMS SMS</li>
+                        </ul>
+                        <a asp-controller="Musteri" asp-action="Tarife" asp-route-id="@tarife.TarifeID" type="button" class="w-100 btn btn-lg btn-outline-primary">Tarifeyi Seç</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

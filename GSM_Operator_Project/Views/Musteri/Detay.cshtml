@@ -1,0 +1,26 @@
+﻿@model GSM_Operator_Project.Models.Musteri
+
+@{
+    ViewData["Title"] = "Müşteri Detayları";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h2>Müşteri Detayları</h2>
+    <table class="table">
+        <tr>
+            <th>Müşteri ID</th>
+            <th>Ad</th>
+            <th>Soyad</th>
+            <th>TC</th>
+            <th>GSM No</th>
+        </tr>
+        <tr>
+            <td>@Model.MusteriID</td>
+            <td>@Model.Ad</td>
+            <td>@Model.Soyad</td>
+            <td>@Model.TC</td>
+            <td>@Model.GSMno</td>
+        </tr>
+    </table>
+</div>
